@@ -5,6 +5,20 @@ on:
             - main
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: checkout Code
+              uses: actions/checkout@v4
+            - name: setup Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.12"
+            
+            - name: check Python syntax
+              run: python -m compileall -q src/
+    
     test:
         runs-on: ubuntu-latest
 
@@ -29,5 +43,13 @@ jobs:
             
             - name: Run Pytest
               run: python -m pytest -v src/
+    
+    report:
+        needs: [build, test]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Display Result
+              run: echo "Build and Test Completed Successfully"
+
               
               
