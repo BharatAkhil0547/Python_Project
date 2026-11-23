@@ -1,7 +1,7 @@
 
 import pytest
 
-from calc import add, subtract, multiply, divide
+from calc import add, divide
 
 
 def test_add():
